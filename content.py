@@ -11,6 +11,12 @@ NAME = "Santiago Garcia"
 # TODO: replace with a one-line description of what you build/do.
 TAGLINE = "Software engineer working in Python, C++, Java, and the web."
 
+# Path to your photo, relative to the static folder. Leave empty to keep the
+# neutral placeholder.
+# TODO: drop a photo at static/images/santiago.jpg and set this to
+# "images/santiago.jpg". Square images crop best.
+IMAGE = ""
+
 # TODO: write 2-4 sentences about your focus, what you enjoy building, and
 # what you are looking for. Keep it plain and specific.
 ABOUT = (

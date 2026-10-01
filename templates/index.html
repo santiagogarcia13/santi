@@ -23,28 +23,42 @@
 
   <main id="main">
     <section id="top" class="hero">
-      <h1>{{ content.NAME }}</h1>
-      <p class="tagline">{{ content.TAGLINE }}</p>
-      {% if content.LOCATION and not content.LOCATION.startswith('TODO') %}
-        <p class="location">{{ content.LOCATION }}</p>
-      {% endif %}
-      <div class="hero-links">
-        {% for label, url in content.LINKS %}
-          <a href="{{ url }}"{% if label == 'GitHub' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ label }}</a>
-        {% endfor %}
+      <div class="hero-inner">
+        <div class="hero-photo reveal" data-reveal-delay="0">
+          {% if content.IMAGE %}
+            <img src="{{ '/static/' ~ content.IMAGE if static_mode else url_for('static', filename=content.IMAGE) }}" alt="{{ content.NAME }}" width="160" height="160">
+          {% else %}
+            <div class="photo-placeholder" role="img" aria-label="Photo placeholder for {{ content.NAME }}">
+              <span>{{ content.NAME.split()[0][0] }}{{ content.NAME.split()[-1][0] }}</span>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="hero-text">
+          <h1 class="reveal" data-reveal-delay="1">{{ content.NAME }}</h1>
+          <p class="tagline reveal" data-reveal-delay="2">{{ content.TAGLINE }}</p>
+          {% if content.LOCATION and not content.LOCATION.startswith('TODO') %}
+            <p class="location reveal" data-reveal-delay="3">{{ content.LOCATION }}</p>
+          {% endif %}
+          <div class="hero-links reveal" data-reveal-delay="4">
+            {% for label, url in content.LINKS %}
+              <a href="{{ url }}"{% if label == 'GitHub' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ label }}</a>
+            {% endfor %}
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="about">
-      <h2>About</h2>
-      <p class="prose">{{ content.ABOUT }}</p>
+      <h2 class="reveal">About</h2>
+      <p class="prose reveal">{{ content.ABOUT }}</p>
     </section>
 
     <section id="skills">
-      <h2>Skills</h2>
+      <h2 class="reveal">Skills</h2>
       <div class="skill-groups">
         {% for group in content.SKILLS %}
-          <div class="skill-group">
+          <div class="skill-group reveal">
             <h3>{{ group.name }}</h3>
             <ul>
               {% for item in group['items'] %}
@@ -57,10 +71,10 @@
     </section>
 
     <section id="projects">
-      <h2>Projects</h2>
+      <h2 class="reveal">Projects</h2>
       <ul class="projects">
         {% for project in content.PROJECTS %}
-          <li>
+          <li class="reveal">
             <div class="project-head">
               <h3>{{ project.name }}</h3>
               {% if project.links %}
@@ -85,14 +99,15 @@
     </section>
 
     <section id="contact">
-      <h2>Contact</h2>
-      <p class="prose">
+      <h2 class="reveal">Contact</h2>
+      <p class="prose reveal">
         <a href="mailto:{{ content.EMAIL }}">{{ content.EMAIL }}</a>
       </p>
 
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
           <ul class="flashes">
+
             {% for category, message in messages %}
               <li class="flash flash-{{ category }}">{{ message }}</li>
             {% endfor %}
@@ -100,7 +115,7 @@
         {% endif %}
       {% endwith %}
 
-      <form action="{{ contact_action }}" method="POST" class="contact-form">
+      <form action="{{ contact_action }}" method="POST" class="contact-form reveal">
         {% if static_mode %}
           <input type="hidden" name="_subject" value="Portfolio contact">
         {% endif %}
