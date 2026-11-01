@@ -7,7 +7,7 @@
   <title>{{ content.SITE_NAME }} — {{ content.NAME }}, {{ content.TAGLINE }}</title>
   <meta name="description" content="{{ content.TAGLINE }}">
   <link rel="stylesheet" href="{{ '/static/css/tailwind-built.css' if static_mode else url_for('static', filename='css/tailwind-built.css') }}">
-  <link rel="stylesheet" href="{{ '/static/css/style.css?v=7' if static_mode else url_for('static', filename='css/style.css', v=7) }}">
+  <link rel="stylesheet" href="{{ '/static/css/style.css?v=8' if static_mode else url_for('static', filename='css/style.css', v=8) }}">
   <link rel="icon" href="data:,">
 </head>
 <body class="cyber-grid bg-[#08090a] text-[#f1f1ef] antialiased">
@@ -62,18 +62,11 @@
       </div>
 
       <div class="reveal hero-console relative z-10 mx-auto w-full max-w-[33rem]" data-reveal-delay="2">
-        <div class="console-frame relative overflow-hidden border border-[#393a3b] bg-[#101112]/95">
-          <div class="console-scanlines pointer-events-none absolute inset-0" aria-hidden="true"></div>
-          <div class="console-top relative flex items-center justify-between gap-3 border-b border-[#303132] px-4 py-3 font-mono text-[10px] uppercase tracking-[0.15em] text-[#a2a3a2] sm:px-5">
-            <span class="flex items-center gap-2"><span class="size-1.5 rounded-full bg-[#e6e6e3]"></span>{{ content.SITE_NAME|upper }}-OS // PROFILE</span>
-            <span>ENCRYPTED CONNECTION</span>
-          </div>
-          <div class="relative p-4 sm:p-6">
-            <div class="mb-5 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-[#858684]">
-              <span>IDENTITY MAP</span>
-              <span class="text-[#e6e6e3]">SYNC: 100%</span>
-            </div>
-            <pre class="ascii-eye" data-ascii-eye role="img" aria-label="Animated ASCII eye">       .--""""--.
+        <div class="mb-5 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-[#858684]">
+          <span>IDENTITY MAP</span>
+          <span class="text-[#e6e6e3]">SYNC: 100%</span>
+        </div>
+        <pre class="ascii-eye" data-ascii-eye role="img" aria-label="Animated ASCII eye">       .--""""--.
     .-'          `-.
   .'    .------.    `.
  /     /  .--.  \     \
@@ -82,22 +75,15 @@
   `.    `------'    .'
     `-.          .-'
        `--.__.--'</pre>
-            <div class="mt-5 grid grid-cols-2 gap-3 border-y border-[#303132] py-4 font-mono text-[10px] uppercase tracking-wider sm:text-xs">
-              <div><span class="block text-[#777978]">OPERATOR</span><span class="mt-1 block text-[#e1e1df]">{{ content.NAME }}</span></div>
-              <div><span class="block text-[#777978]">ROLE</span><span class="mt-1 block text-[#e1e1df]">{{ content.TAGLINE }}</span></div>
-            </div>
-            <div class="mt-4 space-y-2 font-mono text-[10px] text-[#a0a19f] sm:text-xs" aria-label="System status">
-              <p><span class="text-white">&gt;</span> loading_profile<span class="text-[#686a69]">.....................</span><span class="text-white">OK</span></p>
-              <p><span class="text-white">&gt;</span> scanning_projects<span class="text-[#686a69]">..................</span><span class="text-white">READY</span></p>
-              <p><span class="text-white">&gt;</span> opening_secure_channel<span class="text-[#686a69]">.............</span><span class="text-white">OPEN</span></p>
-            </div>
-          </div>
-          <div class="relative flex items-center justify-between border-t border-[#303132] px-4 py-2.5 font-mono text-[9px] uppercase tracking-[0.18em] text-[#858684] sm:px-5">
-            <span>END OF TRANSMISSION</span><span>/// SG-001</span>
-          </div>
+        <div class="mt-5 grid grid-cols-2 gap-3 font-mono text-[10px] uppercase tracking-wider sm:text-xs">
+          <div><span class="block text-[#777978]">OPERATOR</span><span class="mt-1 block text-[#e1e1df]">{{ content.NAME }}</span></div>
+          <div><span class="block text-[#777978]">ROLE</span><span class="mt-1 block text-[#e1e1df]">{{ content.TAGLINE }}</span></div>
         </div>
-        <span class="console-corner console-corner-tl" aria-hidden="true"></span>
-        <span class="console-corner console-corner-br" aria-hidden="true"></span>
+        <div class="mt-4 space-y-2 font-mono text-[10px] text-[#a0a19f] sm:text-xs" aria-label="System status">
+          <p><span class="text-white">&gt;</span> loading_profile<span class="text-[#686a69]">.....................</span><span class="text-white">OK</span></p>
+          <p><span class="text-white">&gt;</span> scanning_projects<span class="text-[#686a69]">..................</span><span class="text-white">READY</span></p>
+          <p><span class="text-white">&gt;</span> opening_secure_channel<span class="text-[#686a69]">.............</span><span class="text-white">OPEN</span></p>
+        </div>
       </div>
     </section>
 
