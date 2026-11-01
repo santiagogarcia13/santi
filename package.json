@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build:css": "tailwindcss -i ./static/css/tailwind.input.css -o ./static/css/tailwind-built.css --minify",
-    "build:vercel": "npm run build:css && python -m pip install -r requirements.txt && python -m flask --app app export-static"
+    "build:vercel": "npm run build:css && python scripts/build_static.py"
   },
   "devDependencies": {
     "tailwindcss": "3.4.17"
