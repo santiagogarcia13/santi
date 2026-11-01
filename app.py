@@ -48,6 +48,11 @@ def index():
     )
 
 
+@app.route("/projects/")
+def projects():
+    return render_template("projects.html", static_mode=False)
+
+
 @app.route("/contact", methods=["POST"])
 def contact():
     name = request.form.get("name", "").strip()
@@ -102,6 +107,11 @@ def export_static():
         )
     (dist / "index.html").write_text(html, encoding="utf-8")
 
+    projects_dir = dist / "projects"
+    projects_dir.mkdir()
+    projects_html = render_template("projects.html", static_mode=True)
+    (projects_dir / "index.html").write_text(projects_html, encoding="utf-8")
+
     shutil.copytree(
         Path(app.static_folder),
         dist / "static",
@@ -111,8 +121,8 @@ def export_static():
     print(f"Exported to {dist}")
     if not content.FORMSPREE_ENDPOINT:
         print(
-            "Note: FORMSPREE_ENDPOINT is empty, so the exported form has no "
-            "action and will not submit. Set it in content.py before deploying."
+            "Note: FORMSPREE_ENDPOINT is empty, so the exported contact form "
+            "is hidden. Visitors can still email you directly."
         )
 
 

@@ -3,152 +3,261 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ content.NAME }}</title>
+  <meta name="theme-color" content="#08090a">
+  <title>{{ content.NAME }} — Software Engineer</title>
   <meta name="description" content="{{ content.TAGLINE }}">
-  <link rel="stylesheet" href="{{ '/static/css/style.css' if static_mode else url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ '/static/css/tailwind-built.css' if static_mode else url_for('static', filename='css/tailwind-built.css') }}">
+  <link rel="stylesheet" href="{{ '/static/css/style.css?v=5' if static_mode else url_for('static', filename='css/style.css', v=5) }}">
   <link rel="icon" href="data:,">
 </head>
-<body>
-  <a class="skip" href="#main">Skip to content</a>
+<body class="cyber-grid bg-[#08090a] text-[#f1f1ef] antialiased">
+  <canvas class="code-rain" aria-hidden="true"></canvas>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <a class="brand" href="#top">{{ content.NAME }}</a>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <header class="site-header sticky top-0 z-20 border-b border-[#292a2b] bg-[#08090a]/90 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-4 lg:px-8">
+      <a class="group inline-flex items-center gap-3 text-sm font-semibold tracking-tight text-[#f4f4f5]" href="#top" aria-label="{{ content.NAME }}, home">
+        <span class="grid size-9 place-items-center border border-[#555657] bg-[#111213] font-mono text-xs text-white transition-transform group-hover:-rotate-6">SG</span>
+        <span>{{ content.NAME }}</span>
+      </a>
+      <nav class="flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-xs uppercase tracking-wider text-[#9b9c9b]" aria-label="Main navigation">
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#skills">Skills</a>
+        <a class="nav-link" href="{{ '/projects/' if static_mode else url_for('projects') }}">Projects</a>
+        <a class="nav-link" href="#contact">Contact</a>
+        <a class="nav-link" href="{{ content.GITHUB_URL }}" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
   </header>
 
-  <main id="main">
-    <section id="top" class="hero">
-      <div class="hero-inner">
-        <div class="hero-photo reveal" data-reveal-delay="0">
-          {% if content.IMAGE %}
-            <img src="{{ '/static/' ~ content.IMAGE if static_mode else url_for('static', filename=content.IMAGE) }}" alt="{{ content.NAME }}" width="160" height="160">
-          {% else %}
-            <div class="photo-placeholder" role="img" aria-label="Photo placeholder for {{ content.NAME }}">
-              <span>{{ content.NAME.split()[0][0] }}{{ content.NAME.split()[-1][0] }}</span>
-            </div>
-          {% endif %}
+  <main id="main" class="mx-auto max-w-6xl px-6 lg:px-8">
+    <section id="top" class="hero-shell relative grid min-h-[calc(88vh-4.5rem)] items-center gap-12 py-16 lg:grid-cols-[1fr_0.9fr] lg:gap-10 lg:py-24">
+      <p class="hero-watermark" aria-hidden="true">SANTIAGO</p>
+      <div class="hero-copy relative z-10">
+        <p class="reveal mb-7 inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-[#b5b6b5]" data-reveal-delay="0">
+          <span class="status-pulse size-2 rounded-full bg-[#d7d8d6]"></span>
+          <span>Independent developer <span class="text-[#686a69]">/</span> online</span>
+        </p>
+        <p class="reveal mb-3 font-mono text-xs uppercase tracking-[0.16em] text-[#777978]" data-reveal-delay="0">SOFTWARE <span class="text-[#d7d8d6]">/</span> WEB <span class="text-[#d7d8d6]">/</span> SYSTEMS</p>
+        <h1 class="hero-title reveal max-w-3xl font-sans text-5xl font-black uppercase leading-[0.88] tracking-[-0.075em] sm:text-6xl md:text-6xl lg:text-7xl" data-reveal-delay="1">
+          Thoughtful<br>
+          code.<br>
+          <span class="hero-title-outline">Useful things<span class="cursor-blink">_</span></span>
+        </h1>
+        <p class="reveal mt-7 max-w-lg border-l border-[#777978] pl-4 text-base leading-7 text-[#b1b2b1] md:text-lg" data-reveal-delay="2">
+          {{ content.TAGLINE }}
+        </p>
+        {% if content.LOCATION and not content.LOCATION.startswith('TODO') %}
+          <p class="reveal mt-4 font-mono text-xs text-[#898a89]" data-reveal-delay="3">LOCATION: {{ content.LOCATION }}</p>
+        {% endif %}
+        <div class="reveal mt-8 flex flex-wrap items-center gap-3" data-reveal-delay="4">
+          <a class="button-primary font-mono uppercase tracking-wide" href="{{ '/projects/' if static_mode else url_for('projects') }}">Explore my work <span aria-hidden="true">-&gt;</span></a>
+          <a class="button-secondary font-mono uppercase tracking-wide" href="#contact">Get in touch</a>
         </div>
+        <div class="reveal mt-7 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs uppercase tracking-wider" data-reveal-delay="5">
+          {% for label, url in content.LINKS %}
+            <a class="text-[#b1b2b1] transition-colors hover:text-white" href="{{ url }}"{% if label == 'GitHub' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ label }} <span aria-hidden="true">[+]</span></a>
+          {% endfor %}
+        </div>
+      </div>
 
-        <div class="hero-text">
-          <h1 class="reveal" data-reveal-delay="1">{{ content.NAME }}</h1>
-          <p class="tagline reveal" data-reveal-delay="2">{{ content.TAGLINE }}</p>
-          {% if content.LOCATION and not content.LOCATION.startswith('TODO') %}
-            <p class="location reveal" data-reveal-delay="3">{{ content.LOCATION }}</p>
-          {% endif %}
-          <div class="hero-links reveal" data-reveal-delay="4">
-            {% for label, url in content.LINKS %}
-              <a href="{{ url }}"{% if label == 'GitHub' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ label }}</a>
-            {% endfor %}
+      <div class="reveal hero-console relative z-10 mx-auto w-full max-w-[33rem]" data-reveal-delay="2">
+        <div class="console-frame relative overflow-hidden border border-[#393a3b] bg-[#101112]/95">
+          <div class="console-scanlines pointer-events-none absolute inset-0" aria-hidden="true"></div>
+          <div class="console-top relative flex items-center justify-between gap-3 border-b border-[#303132] px-4 py-3 font-mono text-[10px] uppercase tracking-[0.15em] text-[#a2a3a2] sm:px-5">
+            <span class="flex items-center gap-2"><span class="size-1.5 rounded-full bg-[#e6e6e3]"></span>SG-OS // PROFILE</span>
+            <span>ENCRYPTED CONNECTION</span>
+          </div>
+          <div class="relative p-4 sm:p-6">
+            <div class="mb-5 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-[#858684]">
+              <span>IDENTITY MAP</span>
+              <span class="text-[#e6e6e3]">SYNC: 100%</span>
+            </div>
+            {% if content.IMAGE %}
+              <div class="ascii-image-wrap">
+                <img class="ascii-image" src="{{ '/static/' ~ content.IMAGE if static_mode else url_for('static', filename=content.IMAGE) }}" alt="{{ content.NAME }}" width="640" height="720">
+                <pre class="ascii-name" aria-hidden="true">  _____   _____
+ / ____| / ____|
+| (___  | |  __
+ \___ \ | | |_ |
+ ____) || |__| |
+|_____/  \_____|
+  S G / NODE</pre>
+              </div>
+            {% else %}
+              <pre class="ascii-name" role="img" aria-label="ASCII art initials SG">
+  _____   _____
+ / ____| / ____|
+| (___  | |  __
+ \___ \ | | |_ |
+ ____) || |__| |
+|_____/  \_____|
+  S G / NODE</pre>
+            {% endif %}
+            <div class="mt-5 grid grid-cols-2 gap-3 border-y border-[#303132] py-4 font-mono text-[10px] uppercase tracking-wider sm:text-xs">
+              <div><span class="block text-[#777978]">OPERATOR</span><span class="mt-1 block text-[#e1e1df]">{{ content.NAME }}</span></div>
+              <div><span class="block text-[#777978]">SPECIALTY</span><span class="mt-1 block text-[#e1e1df]">SOFTWARE / WEB</span></div>
+            </div>
+            <div class="mt-4 space-y-2 font-mono text-[10px] text-[#a0a19f] sm:text-xs" aria-label="System status">
+              <p><span class="text-white">&gt;</span> loading_profile<span class="text-[#686a69]">.....................</span><span class="text-white">OK</span></p>
+              <p><span class="text-white">&gt;</span> scanning_projects<span class="text-[#686a69]">..................</span><span class="text-white">READY</span></p>
+              <p><span class="text-white">&gt;</span> opening_secure_channel<span class="text-[#686a69]">.............</span><span class="text-white">OPEN</span></p>
+            </div>
+          </div>
+          <div class="relative flex items-center justify-between border-t border-[#303132] px-4 py-2.5 font-mono text-[9px] uppercase tracking-[0.18em] text-[#858684] sm:px-5">
+            <span>END OF TRANSMISSION</span><span>/// SG-001</span>
           </div>
         </div>
+        <span class="console-corner console-corner-tl" aria-hidden="true"></span>
+        <span class="console-corner console-corner-br" aria-hidden="true"></span>
       </div>
     </section>
 
-    <section id="about">
-      <h2 class="reveal">About</h2>
-      <p class="prose reveal">{{ content.ABOUT }}</p>
+    <section id="about" class="section-block grid gap-6 py-16 md:grid-cols-[0.7fr_1.3fr] md:gap-16 md:py-24">
+      <div class="reveal">
+        <p class="section-kicker">01 / About</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-[-0.04em]">A bit about me</h2>
+      </div>
+      <p class="reveal max-w-2xl text-lg leading-8 text-[#a1a1aa] md:text-xl">{{ content.ABOUT }}</p>
     </section>
 
-    <section id="skills">
-      <h2 class="reveal">Skills</h2>
-      <div class="skill-groups">
+    <section id="skills" class="section-block py-16 md:py-24">
+      <div class="reveal mb-10 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="section-kicker">02 / What I use</p>
+          <h2 class="mt-3 text-3xl font-semibold tracking-[-0.04em]">Skills &amp; tools</h2>
+        </div>
+        <p class="max-w-sm text-sm leading-6 text-[#858684]">A practical toolkit for thinking through a problem and bringing a solution to life.</p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {% for group in content.SKILLS %}
-          <div class="skill-group reveal">
-            <h3>{{ group.name }}</h3>
-            <ul>
-              {% for item in group['items'] %}
-                <li>{{ item }}</li>
-              {% endfor %}
-            </ul>
-          </div>
+          {% if group['items'] %}
+            <article class="reveal border border-[#303132] bg-[#101112]/80 p-6 transition duration-300 hover:-translate-y-1 hover:border-[#777978] hover:shadow-[0_18px_40px_-30px_rgba(0,0,0,0.8)]">
+              <span class="mb-7 grid size-10 place-items-center border border-[#424344] bg-[#171819] font-mono text-sm text-white">0{{ loop.index }}</span>
+              <h3 class="text-base font-semibold">{{ group.name }}</h3>
+              <ul class="mt-4 flex flex-wrap gap-2">
+                {% for item in group['items'] %}
+                  {% if not item.startswith('TODO') %}
+                    <li class="border border-[#424344] px-3 py-1.5 font-mono text-xs text-[#d0d0ce]">{{ item }}</li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </article>
+          {% endif %}
         {% endfor %}
       </div>
     </section>
 
-    <section id="projects">
-      <h2 class="reveal">Projects</h2>
-      <ul class="projects">
-        {% for project in content.PROJECTS %}
-          <li class="reveal">
-            <div class="project-head">
-              <h3>{{ project.name }}</h3>
+    <section id="projects" class="section-block py-16 md:py-24">
+      <div class="reveal mb-10 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="section-kicker">03 / Selected work</p>
+          <h2 class="mt-3 text-3xl font-semibold tracking-[-0.04em]">Projects</h2>
+        </div>
+        <a class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[#b1b2b1] transition-colors hover:text-white" href="{{ '/projects/' if static_mode else url_for('projects') }}">
+          View all projects <span aria-hidden="true">-&gt;</span>
+        </a>
+      </div>
+      {% set visible_projects = content.PROJECTS %}
+      {% if visible_projects %}
+        <div class="grid gap-4 md:grid-cols-2">
+          {% for project in visible_projects %}
+            <article class="reveal border border-[#303132] bg-[#101112]/80 p-6 sm:p-8">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <p class="section-kicker">Project {{ "%02d"|format(loop.index) }}</p>
+                  <h3 class="mt-3 text-xl font-semibold tracking-tight">{{ project.name }}</h3>
+                </div>
+                <span class="grid size-10 shrink-0 place-items-center border border-[#424344] bg-[#171819] font-mono text-white" aria-hidden="true">[+]</span>
+              </div>
+              <p class="mt-4 leading-7 text-[#b1b2b1]">{{ project.summary }}</p>
+              {% if project.tags %}
+                <ul class="mt-5 flex flex-wrap gap-2">
+                  {% for tag in project.tags %}
+                    <li class="border border-[#424344] px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-[#b1b2b1]">{{ tag }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
               {% if project.links %}
-                <div class="project-links">
+                <div class="mt-6 flex gap-4 border-t border-[#303132] pt-4">
                   {% for label, url in project.links %}
-                    <a href="{{ url }}" target="_blank" rel="noopener noreferrer">{{ label }}</a>
+                    <a class="font-mono text-xs uppercase tracking-wider text-white hover:underline" href="{{ url }}" target="_blank" rel="noopener noreferrer">{{ label }} <span aria-hidden="true">[+]</span></a>
                   {% endfor %}
                 </div>
               {% endif %}
-            </div>
-            <p>{{ project.summary }}</p>
-            {% if project.tags %}
-              <ul class="tags">
-                {% for tag in project.tags %}
-                  <li>{{ tag }}</li>
-                {% endfor %}
-              </ul>
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="reveal flex flex-col gap-6 border border-[#303132] bg-[#101112] p-7 text-white sm:flex-row sm:items-center sm:justify-between sm:p-10">
+          <div class="max-w-xl">
+            <p class="font-mono text-xs uppercase tracking-[0.16em] text-[#d7d8d6]">Work in progress</p>
+            <h3 class="mt-3 text-2xl font-semibold tracking-tight">Good work deserves a little context.</h3>
+            <p class="mt-3 leading-7 text-white/65">I’m curating the projects I share here. Until then, take a look at what I’m building on GitHub.</p>
+          </div>
+          <a class="button-light shrink-0" href="{{ content.GITHUB_URL }}" target="_blank" rel="noopener noreferrer">Visit GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      {% endif %}
     </section>
 
-    <section id="contact">
-      <h2 class="reveal">Contact</h2>
-      <p class="prose reveal">
-        <a href="mailto:{{ content.EMAIL }}">{{ content.EMAIL }}</a>
-      </p>
+    <section id="contact" class="section-block grid gap-10 py-16 md:grid-cols-[0.8fr_1.2fr] md:gap-16 md:py-24">
+      <div class="reveal">
+        <p class="section-kicker">04 / Say hello</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-[-0.04em]">Let’s make something useful.</h2>
+        <p class="mt-4 max-w-sm leading-7 text-[#b1b2b1]">Have a project in mind or just want to connect? My inbox is open.</p>
+        <a class="mt-5 inline-flex font-mono text-sm text-white hover:underline" href="mailto:{{ content.EMAIL }}">{{ content.EMAIL }} <span class="ml-2" aria-hidden="true">[+]</span></a>
+      </div>
 
-      {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-          <ul class="flashes">
+      <div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="mb-6 space-y-2" role="status">
+              {% for category, message in messages %}
+                <li class="rounded-sm border px-4 py-3 text-sm {{ 'border-red-900 bg-red-950/40 text-red-300' if category == 'error' else 'border-[#555657] bg-[#151617] text-[#f1f1ef]' }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
 
-            {% for category, message in messages %}
-              <li class="flash flash-{{ category }}">{{ message }}</li>
-            {% endfor %}
-          </ul>
+        {% if contact_action %}
+          <form action="{{ contact_action }}" method="POST" class="contact-form reveal space-y-5">
+            {% if static_mode %}
+              <input type="hidden" name="_subject" value="Portfolio contact">
+            {% endif %}
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label class="form-label" for="name">Name</label>
+                <input class="form-input" type="text" id="name" name="name" autocomplete="name" placeholder="Your name" required>
+              </div>
+              <div>
+                <label class="form-label" for="email">Email</label>
+                <input class="form-input" type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+              </div>
+            </div>
+            <div>
+              <label class="form-label" for="message">Message</label>
+              <textarea class="form-input min-h-36 resize-y" id="message" name="message" rows="5" placeholder="Tell me a little about it..." required></textarea>
+            </div>
+            <div class="honeypot" aria-hidden="true">
+              <label for="website">Leave this field empty</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+            <button class="button-primary" type="submit">Send message <span aria-hidden="true">↗</span></button>
+          </form>
+        {% else %}
+          <p class="text-sm leading-6 text-[#b1b2b1]">The contact form isn’t enabled yet. Please use the email link instead.</p>
         {% endif %}
-      {% endwith %}
-
-      <form action="{{ contact_action }}" method="POST" class="contact-form reveal">
-        {% if static_mode %}
-          <input type="hidden" name="_subject" value="Portfolio contact">
-        {% endif %}
-
-        <div class="field">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" autocomplete="name" required>
-        </div>
-
-        <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" autocomplete="email" required>
-        </div>
-
-        <div class="field">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-        </div>
-
-        <div class="honeypot" aria-hidden="true">
-          <label for="website">Leave this field empty</label>
-          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-        </div>
-
-        <button type="submit">Send</button>
-      </form>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; {{ content.NAME }}</p>
+  <footer class="border-t border-[#292a2b]">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-7 font-mono text-xs uppercase tracking-wider text-[#858684] lg:px-8">
+      <p>&copy; {{ content.NAME }}</p>
+      <a class="transition-colors hover:text-white" href="#top">Back to top ↑</a>
+    </div>
   </footer>
 
-  <script src="{{ '/static/js/main.js' if static_mode else url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ '/static/js/main.js?v=5' if static_mode else url_for('static', filename='js/main.js', v=5) }}"></script>
 </body>
 </html>

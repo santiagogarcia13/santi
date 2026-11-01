@@ -1,98 +1,76 @@
-"""All site copy and settings live here.
+"""Portfolio copy and settings.
 
-Edit this file to change what the portfolio says. Nothing below requires
-touching the HTML templates.
+Edit this file to personalize the site without changing its templates.
 """
 
 # --- Identity ---------------------------------------------------------------
 
 NAME = "Santiago Garcia"
-
-# TODO: replace with a one-line description of what you build/do.
 TAGLINE = "Software engineer working in Python, C++, Java, and the web."
 
-# Path to your photo, relative to the static folder. Leave empty to keep the
-# neutral placeholder.
-# TODO: drop a photo at static/images/santiago.jpg and set this to
-# "images/santiago.jpg". Square images crop best.
+# Path to your photo, relative to the static folder. Leave empty to use initials.
+# Square images crop best.
 IMAGE = ""
 
-# TODO: write 2-4 sentences about your focus, what you enjoy building, and
-# what you are looking for. Keep it plain and specific.
 ABOUT = (
-    "TODO: Two to four sentences about yourself. What kind of problems do you "
-    "like solving, what are you focused on right now, and what are you looking "
-    "for next. Specific beats impressive-sounding."
+    "I work across Python, C++, Java, and the web, with a focus on building "
+    "software that is clear, useful, and thoughtfully made. I enjoy learning "
+    "new tools, solving problems step by step, and turning ideas into projects "
+    "people can use."
 )
 
-LOCATION = "TODO: City, Country"  # TODO: or delete this line entirely
+LOCATION = "TODO: City, Country"  # Delete this line if you prefer not to show a location.
 
 # --- Links ------------------------------------------------------------------
 
 GITHUB_URL = "https://github.com/santiagogarcia13"
 GITHUB_HANDLE = "santiagogarcia13"
-
 EMAIL = "yagosanti13@gmail.com"
 
-# TODO: add and delete as needed. Each entry is (label, url).
+# Add or remove links as needed. Each entry is (label, url).
 LINKS = [
     ("GitHub", GITHUB_URL),
     ("Email", f"mailto:{EMAIL}"),
 ]
 
-# Set this to a Formspree endpoint to make the hosted form submit somewhere.
-# Leave it empty and the form posts to the local Flask route instead.
-# TODO: sign up at formspree.io, create a form for EMAIL, and paste the
-# endpoint URL here, e.g. "https://formspree.io/f/abcdwxyz".
+# Set this to a Formspree endpoint to receive submissions from the hosted form.
+# Leave it empty to use the local Flask route.
 FORMSPREE_ENDPOINT = ""
 
 # --- Skills -----------------------------------------------------------------
-# TODO: edit these groups. Keep 3-6 items per group; more than that reads as
-# a list of everything rather than what you actually work with.
 
 SKILLS = [
     {
         "name": "Languages",
-        "items": ["Python", "C++", "Java", "HTML", "CSS"],
+        "items": ["Python", "C++", "Java"],
     },
     {
-        "name": "Focus",
-        "items": [
-            "TODO: algorithm and data structure work",
-            "TODO: backend services",
-            "TODO: systems and performance",
-        ],
+        "name": "Web",
+        "items": ["HTML", "CSS", "JavaScript"],
     },
     {
         "name": "Tools",
-        "items": ["Git", "TODO: your editor", "TODO: build tools"],
+        "items": ["Git", "GitHub", "Flask"],
     },
 ]
 
 # --- Projects ---------------------------------------------------------------
-# TODO: replace these with your real projects, most interesting first.
-# `links` is a list of (label, url) pairs. Use [] if there are none.
+# Add screenshots under static/images/projects/ and set `screenshot` to the
+# path relative to static/, for example "images/projects/my-project.png".
+# `links` is a list of (label, url) pairs.
 
 PROJECTS = [
     {
-        "name": "TODO: project name",
+        "name": "MealExplorer",
         "summary": (
-            "TODO: one or two sentences on what it does and what you built. "
-            "Lead with the problem, not the technology."
+            "An Ionic and Angular application for exploring meals and recipes. "
+            "It runs in the browser and can be packaged for Android with Capacitor."
         ),
-        "tags": ["Python"],
-        "links": [("Source", GITHUB_URL)],
-    },
-    {
-        "name": "TODO: project name",
-        "summary": "TODO: what it does and your role in building it.",
-        "tags": ["C++"],
-        "links": [],
-    },
-    {
-        "name": "TODO: project name",
-        "summary": "TODO: what it does and your role in building it.",
-        "tags": ["Java"],
-        "links": [],
+        "tags": ["Ionic", "Angular", "Capacitor", "Android"],
+        "screenshot": "",
+        "screenshot_alt": "MealExplorer application screenshot",
+        "links": [
+            ("Source code", "https://github.com/santiagogarcia13/MealExplorer"),
+        ],
     },
 ]

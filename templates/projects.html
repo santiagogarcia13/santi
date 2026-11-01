@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08090a">
+  <title>Projects — {{ content.NAME }}</title>
+  <meta name="description" content="Selected projects built by {{ content.NAME }}.">
+  <link rel="stylesheet" href="{{ '/static/css/tailwind-built.css' if static_mode else url_for('static', filename='css/tailwind-built.css') }}">
+  <link rel="stylesheet" href="{{ '/static/css/style.css?v=5' if static_mode else url_for('static', filename='css/style.css', v=5) }}">
+  <link rel="icon" href="data:,">
+</head>
+<body class="cyber-grid bg-[#08090a] text-[#f1f1ef] antialiased">
+  <canvas class="code-rain" aria-hidden="true"></canvas>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header sticky top-0 z-20 border-b border-[#292a2b] bg-[#08090a]/90 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-4 lg:px-8">
+      <a class="group inline-flex items-center gap-3 text-sm font-semibold tracking-tight text-[#f4f4f5]" href="/" aria-label="{{ content.NAME }}, home">
+        <span class="grid size-9 place-items-center border border-[#555657] bg-[#111213] font-mono text-xs text-white transition-transform group-hover:-rotate-6">SG</span>
+        <span>{{ content.NAME }}</span>
+      </a>
+      <nav class="flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-xs uppercase tracking-wider text-[#9b9c9b]" aria-label="Main navigation">
+        <a class="nav-link" href="/#about">About</a>
+        <a class="nav-link" href="/#skills">Skills</a>
+        <a class="nav-link active" href="{{ '/projects/' if static_mode else url_for('projects') }}" aria-current="page">Projects</a>
+        <a class="nav-link" href="/#contact">Contact</a>
+        <a class="nav-link" href="{{ content.GITHUB_URL }}" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="mx-auto min-h-[75vh] max-w-6xl px-6 lg:px-8">
+    <section class="section-block py-16 md:py-24">
+      <div class="reveal mb-12 max-w-3xl">
+        <p class="section-kicker">Selected work / {{ "%02d"|format(content.PROJECTS|length) }} projects</p>
+        <h1 class="mt-4 text-5xl font-black uppercase leading-[0.95] tracking-[-0.075em] sm:text-6xl">Things I’ve built.</h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-[#b1b2b1]">A collection of applications and experiments, with a look at how they work and the tools behind them.</p>
+      </div>
+
+      {% if content.PROJECTS %}
+        <div class="grid gap-6 md:grid-cols-2">
+          {% for project in content.PROJECTS %}
+            <article class="project-card reveal overflow-hidden border border-[#303132] bg-[#101112]/80">
+              <div class="project-shot">
+                {% if project.screenshot %}
+                  <img src="{{ '/static/' ~ project.screenshot if static_mode else url_for('static', filename=project.screenshot) }}" alt="{{ project.screenshot_alt }}" loading="lazy">
+                {% else %}
+                  <div class="project-shot-placeholder" role="img" aria-label="Screenshot not added yet">
+                    <span aria-hidden="true">[ + ]</span><br>
+                    Screenshot coming soon
+                  </div>
+                {% endif %}
+              </div>
+              <div class="p-6 sm:p-8">
+                <p class="section-kicker">Project {{ "%02d"|format(loop.index) }}</p>
+                <h2 class="mt-3 text-2xl font-semibold tracking-tight">{{ project.name }}</h2>
+                <p class="mt-4 leading-7 text-[#b1b2b1]">{{ project.summary }}</p>
+                {% if project.tags %}
+                  <ul class="mt-5 flex flex-wrap gap-2" aria-label="Technologies used">
+                    {% for tag in project.tags %}
+                      <li class="border border-[#424344] px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-[#b1b2b1]">{{ tag }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+                {% if project.links %}
+                  <div class="mt-6 flex flex-wrap gap-x-5 gap-y-2 border-t border-[#303132] pt-4">
+                    {% for label, url in project.links %}
+                      <a class="font-mono text-xs uppercase tracking-wider text-white hover:underline" href="{{ url }}" target="_blank" rel="noopener noreferrer">{{ label }} <span aria-hidden="true">↗</span></a>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="border border-[#303132] bg-[#101112] p-8">
+          <p class="font-mono text-xs uppercase tracking-wider text-[#d7d8d6]">No projects added yet</p>
+          <p class="mt-3 text-[#b1b2b1]">Add project details in <code>content.py</code> and screenshots under <code>static/images/projects/</code>.</p>
+        </div>
+      {% endif %}
+    </section>
+  </main>
+
+  <footer class="border-t border-[#292a2b]">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-7 font-mono text-xs uppercase tracking-wider text-[#858684] lg:px-8">
+      <p>&copy; {{ content.NAME }}</p>
+      <a class="transition-colors hover:text-white" href="/">Back to home ↑</a>
+    </div>
+  </footer>
+
+  <script src="{{ '/static/js/main.js?v=5' if static_mode else url_for('static', filename='js/main.js', v=5) }}"></script>
+</body>
+</html>
