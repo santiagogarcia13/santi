@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08090a">
-  <title>Projects — {{ content.NAME }}</title>
+  <title>Projects — {{ content.SITE_NAME }}</title>
   <meta name="description" content="Selected projects built by {{ content.NAME }}.">
   <link rel="stylesheet" href="{{ '/static/css/tailwind-built.css' if static_mode else url_for('static', filename='css/tailwind-built.css') }}">
   <link rel="stylesheet" href="{{ '/static/css/style.css?v=5' if static_mode else url_for('static', filename='css/style.css', v=5) }}">
@@ -18,7 +18,7 @@
     <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-4 lg:px-8">
       <a class="group inline-flex items-center gap-3 text-sm font-semibold tracking-tight text-[#f4f4f5]" href="/" aria-label="{{ content.NAME }}, home">
         <span class="grid size-9 place-items-center border border-[#555657] bg-[#111213] font-mono text-xs text-white transition-transform group-hover:-rotate-6">SG</span>
-        <span>{{ content.NAME }}</span>
+        <span>{{ content.SITE_NAME }}</span>
       </a>
       <nav class="flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-xs uppercase tracking-wider text-[#9b9c9b]" aria-label="Main navigation">
         <a class="nav-link" href="/#about">About</a>
