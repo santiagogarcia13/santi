@@ -10,57 +10,13 @@
   var asciiEye = document.querySelector("[data-ascii-eye]");
 
   if (asciiEye && !reduceMotion) {
-    var eyeFrames = [
-      [
-        "       .--\"\"\"\"--.",
-        "    .-'          `-.",
-        "  .'    .------.    `.",
-        " /     /  .--.  \\     \\",
-        "|     |  (  o  )  |     |",
-        " \\     \\  `--'  /     /",
-        "  `.    `------'    .'",
-        "    `-.          .-'",
-        "       `--.__.--'",
-      ],
-      [
-        "       .--\"\"\"\"--.",
-        "    .-'          `-.",
-        "  .'    .------.    `.",
-        " /     /  .--.  \\     \\",
-        "|     |  ( o   )  |     |",
-        " \\     \\  `--'  /     /",
-        "  `.    `------'    .'",
-        "    `-.          .-'",
-        "       `--.__.--'",
-      ],
-      [
-        "       .--\"\"\"\"--.",
-        "    .-'          `-.",
-        "  .'    .------.    `.",
-        " /     /  .--.  \\     \\",
-        "|     |  (   o )  |     |",
-        " \\     \\  `--'  /     /",
-        "  `.    `------'    .'",
-        "    `-.          .-'",
-        "       `--.__.--'",
-      ],
-      [
-        "       .--\"\"\"\"--.",
-        "    .-'          `-.",
-        "  .'    .------.    `.",
-        " /      `--------'    \\",
-        "|                      |",
-        " \\     `----------'    /",
-        "  `.    `------'    .'",
-        "    `-.          .-'",
-        "       `--.__.--'",
-      ],
-    ];
+    var eyeArtwork = asciiEye.textContent;
+    var eyePupils = ["@", "O", "0", "O"];
     var eyeFrame = 0;
 
     function advanceEye() {
-      eyeFrame = (eyeFrame + 1) % eyeFrames.length;
-      asciiEye.textContent = eyeFrames[eyeFrame].join("\n");
+      eyeFrame = (eyeFrame + 1) % eyePupils.length;
+      asciiEye.textContent = eyeArtwork.replace("@", eyePupils[eyeFrame]);
     }
 
     var eyeTimer = 0;

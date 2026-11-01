@@ -276,9 +276,9 @@ textarea:focus-visible {
   overflow: hidden;
   color: #f1f1ef;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: clamp(0.55rem, 1.65vw, 0.85rem);
+  font-size: clamp(0.3rem, 1.5vw, 0.85rem);
   font-weight: 500;
-  line-height: 1.45;
+  line-height: 1.35;
   text-align: center;
   text-shadow: 0 0 18px rgb(255 255 255 / 28%);
   white-space: pre;
