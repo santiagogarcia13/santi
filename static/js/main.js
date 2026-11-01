@@ -5,6 +5,80 @@
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
+  // --- ASCII eye ----------------------------------------------------------
+
+  var asciiEye = document.querySelector("[data-ascii-eye]");
+
+  if (asciiEye && !reduceMotion) {
+    var eyeFrames = [
+      [
+        "       .--\"\"\"\"--.",
+        "    .-'          `-.",
+        "  .'    .------.    `.",
+        " /     /  .--.  \\     \\",
+        "|     |  (  o  )  |     |",
+        " \\     \\  `--'  /     /",
+        "  `.    `------'    .'",
+        "    `-.          .-'",
+        "       `--.__.--'",
+      ],
+      [
+        "       .--\"\"\"\"--.",
+        "    .-'          `-.",
+        "  .'    .------.    `.",
+        " /     /  .--.  \\     \\",
+        "|     |  ( o   )  |     |",
+        " \\     \\  `--'  /     /",
+        "  `.    `------'    .'",
+        "    `-.          .-'",
+        "       `--.__.--'",
+      ],
+      [
+        "       .--\"\"\"\"--.",
+        "    .-'          `-.",
+        "  .'    .------.    `.",
+        " /     /  .--.  \\     \\",
+        "|     |  (   o )  |     |",
+        " \\     \\  `--'  /     /",
+        "  `.    `------'    .'",
+        "    `-.          .-'",
+        "       `--.__.--'",
+      ],
+      [
+        "       .--\"\"\"\"--.",
+        "    .-'          `-.",
+        "  .'    .------.    `.",
+        " /      `--------'    \\",
+        "|                      |",
+        " \\     `----------'    /",
+        "  `.    `------'    .'",
+        "    `-.          .-'",
+        "       `--.__.--'",
+      ],
+    ];
+    var eyeFrame = 0;
+
+    function advanceEye() {
+      eyeFrame = (eyeFrame + 1) % eyeFrames.length;
+      asciiEye.textContent = eyeFrames[eyeFrame].join("\n");
+    }
+
+    var eyeTimer = 0;
+
+    asciiEye.classList.add("is-animated");
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        window.clearInterval(eyeTimer);
+        eyeTimer = 0;
+      } else if (!eyeTimer) {
+        eyeTimer = window.setInterval(advanceEye, 280);
+      }
+    });
+    if (!document.hidden) {
+      eyeTimer = window.setInterval(advanceEye, 280);
+    }
+  }
+
   // --- Ambient code rain --------------------------------------------------
 
   var rainContainer = document.querySelector(".code-rain");

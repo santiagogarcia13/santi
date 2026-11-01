@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08090a">
-  <title>{{ content.SITE_NAME }} — {{ content.NAME }}, Software Engineer</title>
+  <title>{{ content.SITE_NAME }} — {{ content.NAME }}, {{ content.TAGLINE }}</title>
   <meta name="description" content="{{ content.TAGLINE }}">
   <link rel="stylesheet" href="{{ '/static/css/tailwind-built.css' if static_mode else url_for('static', filename='css/tailwind-built.css') }}">
-  <link rel="stylesheet" href="{{ '/static/css/style.css?v=5' if static_mode else url_for('static', filename='css/style.css', v=5) }}">
+  <link rel="stylesheet" href="{{ '/static/css/style.css?v=7' if static_mode else url_for('static', filename='css/style.css', v=7) }}">
   <link rel="icon" href="data:,">
 </head>
 <body class="cyber-grid bg-[#08090a] text-[#f1f1ef] antialiased">
@@ -73,30 +73,18 @@
               <span>IDENTITY MAP</span>
               <span class="text-[#e6e6e3]">SYNC: 100%</span>
             </div>
-            {% if content.IMAGE %}
-              <div class="ascii-image-wrap">
-                <img class="ascii-image" src="{{ '/static/' ~ content.IMAGE if static_mode else url_for('static', filename=content.IMAGE) }}" alt="{{ content.NAME }}" width="640" height="720">
-                <pre class="ascii-name" aria-hidden="true">  _____   _____
- / ____| / ____|
-| (___  | |  __
- \___ \ | | |_ |
- ____) || |__| |
-|_____/  \_____|
-  S G / NODE</pre>
-              </div>
-            {% else %}
-              <pre class="ascii-name" role="img" aria-label="ASCII art initials SG">
-  _____   _____
- / ____| / ____|
-| (___  | |  __
- \___ \ | | |_ |
- ____) || |__| |
-|_____/  \_____|
-  S G / NODE</pre>
-            {% endif %}
+            <pre class="ascii-eye" data-ascii-eye role="img" aria-label="Animated ASCII eye">       .--""""--.
+    .-'          `-.
+  .'    .------.    `.
+ /     /  .--.  \     \
+|     |  (  o  )  |     |
+ \     \  `--'  /     /
+  `.    `------'    .'
+    `-.          .-'
+       `--.__.--'</pre>
             <div class="mt-5 grid grid-cols-2 gap-3 border-y border-[#303132] py-4 font-mono text-[10px] uppercase tracking-wider sm:text-xs">
               <div><span class="block text-[#777978]">OPERATOR</span><span class="mt-1 block text-[#e1e1df]">{{ content.NAME }}</span></div>
-              <div><span class="block text-[#777978]">SPECIALTY</span><span class="mt-1 block text-[#e1e1df]">SOFTWARE / WEB</span></div>
+              <div><span class="block text-[#777978]">ROLE</span><span class="mt-1 block text-[#e1e1df]">{{ content.TAGLINE }}</span></div>
             </div>
             <div class="mt-4 space-y-2 font-mono text-[10px] text-[#a0a19f] sm:text-xs" aria-label="System status">
               <p><span class="text-white">&gt;</span> loading_profile<span class="text-[#686a69]">.....................</span><span class="text-white">OK</span></p>
@@ -258,6 +246,6 @@
     </div>
   </footer>
 
-  <script src="{{ '/static/js/main.js?v=5' if static_mode else url_for('static', filename='js/main.js', v=5) }}"></script>
+  <script src="{{ '/static/js/main.js?v=7' if static_mode else url_for('static', filename='js/main.js', v=7) }}"></script>
 </body>
 </html>

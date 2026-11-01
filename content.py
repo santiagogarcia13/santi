@@ -7,7 +7,7 @@ Edit this file to personalize the site without changing its templates.
 
 NAME = "Santiago Garcia"
 SITE_NAME = "santi"
-TAGLINE = "Software engineer working in Python, C++, Java, and the web."
+TAGLINE = "Information Technology Student"
 
 # Path to your photo, relative to the static folder. Leave empty to use initials.
 # Square images crop best.
